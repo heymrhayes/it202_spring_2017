@@ -1,0 +1,30 @@
+/*
+    styles copied from 
+    http://www.kirupa.com
+*/
+
+body {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    line-height: 1.75;
+    text-align: left;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga" on;
+    background-color: #FFF;
+}
+
+p {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: #585858;
+}
+
+h1 {
+    background-color:  #00205b;
+    color:#FFF;
+    text-align: center;
+    padding: 5px;
+}
+            

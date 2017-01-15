@@ -2,13 +2,26 @@
 <html>
     <head>
         <title>IT202 Home</title>
+        <link rel="stylesheet" href="/assets/document_styles.css">
     </head>
     <body>
         <h1>IT 202</h1>
-        <ol>
-            <li><a href="./1/index.html">Lecture 1</a></li>
-            <li><a href="./2/index.html">Lecture 2</a></li>
-        </ol>
+        <ol id='listLectures'></ol>
+        
+        <script>
+            var maxLectureNumber = 3;
+            var list = document.getElementById("listLectures");
+            var li, a, node;
+            for (var i=1; i<= maxLectureNumber; i++) {
+                a = document.createElement("a");
+                li = document.createElement("li");
+                a.href="./" + i + "/index.html";
+                a.innerHTML = "Lecture " + i;
+                li.appendChild(a);
+                list.appendChild(li);
+            }
+            
+        </script>
         
     </body>
 </html>
