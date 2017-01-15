@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>IT202 - Lab 3</title>
+        <link rel="stylesheet" href="../../assets/document_styles.css" />
+    </head>
+    <body>
+        <h1 class="lab">Lab 3: Integrating Cloud9 and GitHub</h1>
+        <div class="lab-intro">
+            <p class="lab-intro">GitHub is now an indespensible tool and platform for developers; you'll use it to share your work and to demonstrate your skills to potential collaborators and employers. </p>
+            <p class="lab-intro">In this lab, you'll create a file, create a Git repo in your Cloud9 workspace, create an empty GitHub repo, associate your c9 workspace with that repo, and push your Cloud9 workspace Git to that GitHub repo. </p>
+            <p class="lab-intro">The <strong>accomplishment</strong> we're going for is that you understand how to work with c9, Git and GitHub. Make sure to take some time to <em>understand</em> what you're doing in each step; you'll be working with these tools all semester (and possibly beyond.)</p>
+        </div>
+        <div class="lab lab-section lab-materials">
+            <h2>Materials List</h2>
+            <ul>
+                <li>A Cloud9 account</li>
+                <li>A c9 workspace named <code>it202</code></li>
+                <li>A folder in that workspace named <code>labs</code></li>
+                <li>A GitHub account</li>
+            </ul>
+        </div>
+        <div class="lab lab-section lab-instructions">
+             <h2>Instructions</h2>
+             <h3>Part 1 - Create a new folder and file in your c9 folder</h3>
+            <ol>
+                <li>In your <code>labs</code> folder, create a new file named <code>lab3.html</code>.  Use the c9 default html template. </li>
+                <li>Add an <code>h1</code> element with the content "Lab 3: LastName, First Name" (e.g. Lab 3: Hayes, Dave) and a <code>title</code> element with the same content. </li>
+                <li>Save your file.</li>
+             </ol>
+             
+             <h3>Part 2 - Create a new, empty GitHub repo</h3> 
+             <ol start="4">
+                 <li>Navigate to GitHub and log in to your account.</li>
+                 <li>Create a new repo, name it <code>it202</code>, and leave the "Intialize this repository..." box <strong>unchecked</strong>.  (You will be importing an existing repository.)</li>
+                 <li>When the repo opens, get the URL for the repo by clicking the green <strong>Clone or download</strong> button;  copy the URL for use in the next part.</li>
+             </ol>
+             <h3>Part 3 - Associate your c9 workspace to your GitHub repo and push your local repo</h3> 
+                 <ol start="7">
+                <li>In your c9 IDE, navigate to the <strong>bash</strong> terminal window; if it's not already open, select <strong>Window > New Terminal</strong> from the menu.</li>
+                <li>Make sure your command prompt shows you're at the top level of your directory, because you're going to create one repo for all (or at least most) of your coursework. The prompt should show <code>&lt;your username&gt;:~/workspace</code>.  If it doesn't, close that window and open a new terminal window.  
+                </li>
+                <li>Follow the instructions at <a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/#platform-linux">https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/#platform-linux</a> to set your new GitHub repo as the <strong>master</strong> for your c9 repo.</li>
+                <li>Look at your repo on GitHub and verify that your file(s) have been pushed.</li>
+            </ol>
+            <h3>Part 4 - Make and push changes, and verify.</h3> 
+                 <ol start="11">
+                <li>In c9, open your <code>lab3.html</code> file, and add a <code>p</code> element below the existing <strong>h1</strong> element, with the content <code>Hello, World</code>. Save the file.</li>
+                <li>In the terminal, run the command <code>git status</code> to see the differences between your file system and the <strong>master</strong> branch on GitHub. Note the message text and message color.</li>
+                <li>Add file contents to your local (c9) Git by running <code>git add *</code></li>
+                <li>Run <code>git status</code> again, and again, note the message text and message color.</li> 
+                <li>Record those changes to your local (c9) Git by running <code>git commit -m "update lab3"</code>.</li> 
+                <li>Push your local (c9) Git to GitHub by running<code>git push origin master</code>.</li>
+                <li>Examine your repo on GitHub and verify that it shows your latest version.</li>
+            </ol>
+         
+         
+         
+        </div>
+            <div class="lab  lab-section lab-resources">
+             <h2>Resources</h2>
+            <dl>
+              <dt>HTML Validator</dt>
+              <dd><a href="https://validator.w3.org/">https://validator.w3.org/</a></dd>
+              <dt>HTML tag/element reference - w3schools</dt>
+              <dd><a href="http://www.w3schools.com/tags/default.asp">http://www.w3schools.com/tags/default.asp</a></dd>
+                <dt>HTML tag/element reference - MDN</dt>
+                <dd><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">https://developer.mozilla.org/en-US/docs/Web/HTML/Element</a></dd>
+            <dt>Code style guidelines - GitHub</dt>
+            <dd><a href="http://primercss.io/guidelines/#general-formatting">http://primercss.io/guidelines/#general-formatting</a></dd>
+            <dt>Code style guidelines - w3schools</dt>
+            <dd><a href="http://primercss.io/guidelines/#general-formatting">http://primercss.io/guidelines/#general-formatting</a></dd>
+            <dt>Documentation for <code>git add</code></dt>
+            <dd><a href="https://git-scm.com/docs/git-add">https://git-scm.com/docs/git-add</a></dd>
+            <dt>Documentation for <code>git commit</code></dt>
+            <dd><a href="https://git-scm.com/docs/git-commit">https://git-scm.com/docs/git-commit</a></dd>
+            </dl>
+        </div>
+    </body>
+</html>
