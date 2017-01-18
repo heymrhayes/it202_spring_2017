@@ -65,8 +65,20 @@
                 </li>
 
             </ol>
-            <h3>Part 4 - Make and push changes, and verify.</h3> 
+            <h3>Part 4 - Modify the template layout</h3> 
                  <ol start="14">
+                <li>Add a second row of "tiles" by finding the <strong>div</strong> with the class <strong>row</strong>, and duplicating it;  paste a copy of the entire "row" div below the original but still inside the parent div with the class <strong>container</strong> (and above the <strong>hr</strong> and <strong>footer</strong> elements.</li>
+                <li>Add another "tile" to the first row by copying one of the existing elements and pasting it inside the "row" div.  Notice that the layout is disrupted and that new tile is displayed on a page by itself.  
+                    <div class="alert alert-danger">
+                        <strong>Why is the layout disrupted?</strong><br>
+                        Why?  Because we have created four 4-column elements, or 16 total columns of content.  The Bootstrap grid model is based on 12 columns of content.  
+                    </div>
+                </li>
+                
+                <li>Change the tiles in that first row to be 3-column elements by modifying their class attributes.  They should now display on one line, assuming the screen is wide enough.</li>
+            </ol>
+            <h3>Part 4 - Make and push changes, and verify.</h3> 
+                 <ol start="17">
                 <li>After you've made all the changes and verified that your page is working, do a final save of your file.</li>
                 <li>In the terminal, run the command <code>git status</code> to see the differences between your file system and the <strong>master</strong> branch on GitHub. Note the message text and message color.</li>
                 <li>Add file contents to your local (c9) Git by running <code>git add *</code></li>
