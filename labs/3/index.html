@@ -7,51 +7,71 @@
         <link rel="stylesheet" href="../../assets/document_styles.css" />
     </head>
     <body>
-        <h1 class="lab">Lab 3: Integrating Cloud9 and GitHub</h1>
+        <h1 class="lab">Lab 3: First Bootstrap Page</h1>
         <div class="lab-intro">
-            <p class="lab-intro">GitHub has become an indespensible tool and platform for developers; you'll use it to share your work and to demonstrate your skills to potential collaborators and employers. </p>
-            <p class="lab-intro">In this lab, you'll create a file, create a Git repo in your Cloud9 workspace, create an empty GitHub repo, associate your c9 workspace with that repo, and push your Cloud9 workspace Git to that GitHub repo. </p>
-            <p class="lab-intro">The <strong>accomplishment</strong> we're going for is that you understand how to work with c9, Git and GitHub. Make sure to take some time to <em>understand</em> what you're doing in each step; you'll be working with these tools all semester (and possibly beyond.)</p>
+            <p class="lab-intro">Bootstrap is indeed "the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web", and you'll want to be familiar with the basic concepts so that you can create your own layouts and templates and/or manipulate others' layouts and templates.</p>
+            <p class="lab-intro">In this lab, you'll download download a template, upload it to Cloud9, make some modifications, update your Git and push it up to GitHub.  You'll also enable GitHub pages on your repo so that you and others can access your pages.</p>
+            <p class="lab-intro">The <strong>accomplishment</strong> we're going for is that you understand how to use and manipulate a Bootstrap template, how to diagnose and resolve file references in a page and that you practice with c9, Git and GitHub. </p>
         </div>
         <div class="lab lab-section lab-materials">
             <h2>Materials List</h2>
             <ul>
-                <li>A Cloud9 account</li>
-                <li>A c9 workspace named <code>it202</code></li>
+                <li>A Cloud9 workspace named <code>it202</code></li>
                 <li>A folder in that workspace named <code>labs</code></li>
                 <li>A GitHub account</li>
             </ul>
         </div>
         <div class="lab lab-section lab-instructions">
              <h2>Instructions</h2>
-             <h3>Part 1 - Create a new folder and file in your c9 folder</h3>
+             <h3>Part 1 - Copy a Bootstrap template</h3>
             <ol>
-                <li>In your <code>labs</code> folder, create a new file named <code>lab3.html</code>.  Use the c9 default html template. </li>
-                <li>Add an <code>h1</code> element with the content "Lab 3: LastName, First Name" (e.g. Lab 3: Hayes, Dave) and a <code>title</code> element with the same content. </li>
-                <li>Save your file.</li>
+                <li>In your <code>labs</code> folder, create a new empty file (no  template.)  </li>
+                <li>Navigate to the Bootstrap examples on the <strong>Getting Started </strong> page at <a href="http://getbootstrap.com/getting-started/">http://getbootstrap.com/getting-started/</a>. </li>
+                <li>Open the <strong>Jumbotron</strong> example, view and copy the page source, and paste the contents to your c9 file.  Note that there is no color-coding, text-completion or any other feature; in the absence of a file extension, the editor doesn't know what color-coding or other features make sense for the file. </li>
+                 <li>Save your file as <code>lab3.html</code>.</li>
+                <li>Change the content for both the main headline and the <strong>title</strong> element to "Lab 3: LastName, First Name" (e.g. Lab 3: Hayes, Dave).</li>
+                <li>Save your file again.</li>
+                <li>Preview it (<strong>Preview > Live Preview File</strong>), pop it to a new window, and note that it doesn't look like it should.  
+                    
+                </li>
+             </ol>
+             <h3>Part 2 - Diagnose the problem(s)</h3> 
+             <ol start="7">
+                 <li>In the tab with your previewed file, open the Dev Tools to the Network tab, and refresh the page. Make sure you're displaying <strong>all</strong> file types.</li>
+                 <li>Notice the items in <span style="color:red;">red</span> with a status of <strong>404</strong>.  Open the <strong>HTTP Status Codes</strong> page linked in the <strong>Resources</strong> section, and find out what status <strong>404</strong> indicates.</li>
+                 <li>Click the first 404 item in the Network tab to open the details pane, and look at the <strong>Request URL</strong>.  Note that it refers to a path and file that isn't in your c9 workspace. </li>
+                 <li>In your <code>lab3.html</code> file, find the html tag that generated that request. (Use the editor's <strong>Find</strong> feature to search for the file name.)</li>
+                 
              </ol>
              
-             <h3>Part 2 - Create a new, empty GitHub repo</h3> 
-             <ol start="4">
-                 <li>Navigate to GitHub and log in to your account.</li>
-                 <li>Create a new repo, name it <code>it202</code>, and leave the "Intialize this repository..." box <strong>unchecked</strong>.  (You will be importing an existing repository.)</li>
-                 <li>When the repo opens, get the URL for the repo by clicking the green <strong>Clone or download</strong> button;  copy the URL for use in the next part.</li>
-             </ol>
-             <h3>Part 3 - Associate your c9 workspace to your GitHub repo and push your local repo</h3> 
-                 <ol start="7">
-                <li>In your c9 IDE, navigate to the <strong>bash</strong> terminal window; if it's not already open, select <strong>Window > New Terminal</strong> from the menu.</li>
-                <li>Make sure your command prompt shows you're at the top level of your directory, because you're going to create one repo for all (or at least most) of your coursework. The prompt should show <code>&lt;your username&gt;:~/workspace</code>.  If it doesn't, close that window and open a new terminal window.  
+             <h3>Part 3 - Solve the problems</h3> 
+                <div> 
+                 <p>
+                 The example page that we copied included <em>relative</em> file and path references that were valid based on the location of that file on Bootstrap's server.
+                 </p>
+                 <p>We didn't copy their entire folder and file structure, we just copied the contents of one file.  We have two options for dealing with this situation: 1 - create copies of the needed files on <em>our</em> server and adjust the URL paths in our file; or 2 - find out where the files reside on <em>another</em> server and use absolute URL paths in our html file to point to those locations.
+                 </p>
+                 <p>Let's go with option 2.</p>
+             </div>
+                 <ol start="11">
+                <li>You've already found the location in your html file where the first missing file is referenced.  We need to know the URL to that file on Bootstrap's server(s), and we can use the Dev Tools to find the full path.  Go back to the tab that displayed their <strong>Jumbotron</strong> example, open the Dev Tools Network tab, refresh the page, and find the relevant file in the list.  Click that entry to open the details pane.  In the Headers pane, expand the <strong>General</strong> section to see the <em>absolute URL</em> to that file.  Copy the address, and open it directly in a new browser tab to make sure it's correct and accessible.  </li>
+                <li>
+                    In your lab3.html file, in the tag that references that file, replace the existing relative reference with the absolute URL.  Save your file, refresh the browser tab that's displaying your page, and check the Dev Tools Network tab.   Note the status for the page now.
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Mixed Content</strong>
+                            <br>Depending on what type of file you're referencing, you may see an error message about "mixed content."  The issue is that your lab3.html page is being served by Cloud9 using HTTPS (secure) and the absolute reference you pasted uses HTTP (non-secure.) <br> Change the protocol used in the reference to that file to HTTPS, and it should work.  Some content can't be accessed using HTTPS because it's not been enabled on the server;  in such a case, you'd need to make your own copy and deliver it from your server.
+                        </div>
+                        <li>Fix the other invalid file references using the same method.</li>
                 </li>
-                <li>Follow the instructions at <a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/#platform-linux">https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/#platform-linux</a> to set your new GitHub repo as the <strong>master</strong> for your c9 repo.</li>
-                <li>Look at your repo on GitHub and verify that your file(s) have been pushed.</li>
+
             </ol>
             <h3>Part 4 - Make and push changes, and verify.</h3> 
-                 <ol start="11">
-                <li>In c9, open your <code>lab3.html</code> file, and add a <code>p</code> element below the existing <strong>h1</strong> element, with the content <code>Hello, World</code>. Save the file.</li>
+                 <ol start="14">
+                <li>After you've made all the changes and verified that your page is working, do a final save of your file.</li>
                 <li>In the terminal, run the command <code>git status</code> to see the differences between your file system and the <strong>master</strong> branch on GitHub. Note the message text and message color.</li>
                 <li>Add file contents to your local (c9) Git by running <code>git add *</code></li>
                 <li>Run <code>git status</code> again, and again, note the message text and message color.</li> 
-                <li>Record those changes to your local (c9) Git by running <code>git commit -m "update lab3"</code>.</li> 
+                <li>Record those changes to your local (c9) Git by running <code>git commit -m "intial load lab3"</code>.</li> 
                 <li>Push your local (c9) Git to GitHub by running<code>git push origin master</code>.</li>
                 <li>Examine your repo on GitHub and verify that it shows your latest version.</li>
             </ol>
@@ -62,6 +82,9 @@
             <div class="lab  lab-section lab-resources">
              <h2>Resources</h2>
             <dl>
+              <dt>HTTP status codes </dt>
+              <dd><a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</a></dd>
+              
               <dt>HTML Validator</dt>
               <dd><a href="https://validator.w3.org/">https://validator.w3.org/</a></dd>
               <dt>HTML tag/element reference - w3schools</dt>
