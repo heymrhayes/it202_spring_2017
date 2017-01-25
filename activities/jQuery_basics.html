@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>IT202 - Activity: jQuery Basics</title>
+        <link rel="stylesheet" href="../assets/document_styles.css" />
+    </head>
+    <body>
+        <h1 class="lab">Activity: jQuery Basics</h1>
+        <div class="lab-intro">
+            <p class="lab-intro">In this activity, we'll explore some basics of jQuery by typing commands in the console and then by creating a simple page that includes jQuery commands.</p>
+        </div>
+        <div class="lab lab-section lab-instructions">
+             <h2>Instructions</h2>
+             <h3>Part 1 - Commands in the console</h3>
+            <ol>
+                <li>Open a new browser tab and navigate to <a href="http://www.uic.edu/">http://www.uic.edu/</a></li>
+                <li>Open the JavaScript console.</li>
+                <li>Write and execute a jQuery selector to select all <strong>paragraph</strong> components on the page.</li>
+                <li>Note the display in the console;  you should see an array of elements (if your selector is correct.)  </li>
+                <li>Expand that array to see the individual elements, and note that as you mouseover each one, it will be highlighted in the browser window.</li>
+                <li>Write a jQuery statement to hide all those <strong>paragraph</strong> elements.</li>
+                <li>Write a jQuery statement to set the color of all <strong>h2</strong> elements to green.</li>
+                <li>Write a jQuery selector to select all elements with a class of <strong>home-list-header</strong></li>
+                <li>Write a jQuery statement to add a click event handler to those elements with an anonymous function to set their font-size to <code>100px</code>.   What if we only wanted to change the specific item we clicked on?</li>
+             </ol>
+             
+             <h3>Part 2 - Add some jQuery to a web page</h3> 
+             <ol>
+                 <li>In c9, create a new file using the html template, name it <code>jquery_basics.html</code>, and save it in a folder named <code>activities</code> (this should be a sibling to your <code>labs</code> folder.)</li>
+                 <li>Add a paragraph element with the content <code>Hello jQuery</code>; give it an id attribute with the value <code>p1</code>.</li>
+                 <li>Add a button element with the value <code>Click me!</code>; give it an id attribute with the value <code>button1</code>.</li>
+                 <li>At the end of the body element, add a <code>script</code> tag to include the jQuery library file;  use a CDN URI.  Test for errors.</li>
+                 <li>Below that, create another <code>script</code> tag, and create the main jQuery function for your page. Test.</li>
+                 <li>Create a mouseover event handler for the paragraph (use an id selector); add an anonymous function that sets the color to blue.</li>
+                 <li>Create a mouseout event handler for the paragraph (use an id selector); add an anonymous function that sets the color to black.</li>
+                 <li>Create a click event handler for the paragraph (use an id selector); add an anonymous function that increases the font size by 6px each time.</li>
+                 
+                 <li>Create a click event handler for the button (use an id selector); add an anonymous function that hides the paragraph element.</li>
+             </ol>
+
+         
+         
+         
+        </div>
+            <div class="lab  lab-section lab-resources">
+             <h2>Resources</h2>
+            <dl>
+                <dt>Some Basic UNIX Commands</dt>
+                <dd><a href="https://www.tjhsst.edu/~dhyatt/superap/unixcmd.html">https://www.tjhsst.edu/~dhyatt/superap/unixcmd.html</a></dd>
+              <dt>HTML Validator</dt>
+              <dd><a href="https://validator.w3.org/">https://validator.w3.org/</a></dd>
+              <dt>HTML tag/element reference - w3schools</dt>
+              <dd><a href="http://www.w3schools.com/tags/default.asp">http://www.w3schools.com/tags/default.asp</a></dd>
+                <dt>HTML tag/element reference - MDN</dt>
+                <dd><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">https://developer.mozilla.org/en-US/docs/Web/HTML/Element</a></dd>
+            <dt>Code style guidelines - GitHub</dt>
+            <dd><a href="http://primercss.io/guidelines/#general-formatting">http://primercss.io/guidelines/#general-formatting</a></dd>
+            <dt>Code style guidelines - w3schools</dt>
+            <dd><a href="http://primercss.io/guidelines/#general-formatting">http://primercss.io/guidelines/#general-formatting</a></dd>
+            <dt>Documentation for <code>git add</code></dt>
+            <dd><a href="https://git-scm.com/docs/git-add">https://git-scm.com/docs/git-add</a></dd>
+            <dt>Documentation for <code>git commit</code></dt>
+            <dd><a href="https://git-scm.com/docs/git-commit">https://git-scm.com/docs/git-commit</a></dd>
+            </dl>
+        </div>
+    </body>
+</html>
