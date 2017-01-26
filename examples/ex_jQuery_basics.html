@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Example: jQuery Basics</title>
+        <style>
+            body,button {text-align: center; font-size: 2em;}
+        </style>
+    </head>
+    <body>
+        <p id="p1">Hello jQuery</p>
+        <button id="button1">Click Me!</button>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            
+            //  main "document ready" function
+            $(function() {
+                
+                // p1 event handlers;  note you can chain them
+                $("#p1")
+                    .on("mouseover" , function() {
+                        $("#p1").css("color","blue");
+                    })
+                    .on("mouseout" , function() {
+                        $("#p1").css("color","black");
+                    })
+                    .on("click" , function() {
+                        // note that we can use an expression in the value param
+                        $("#p1").css("font-size","+=6");  
+                    });
+                
+                // button handler
+                $("#button1")
+                    .on("click", function () {
+                        $("#p1").hide();
+                        $(this).text("Now Double-Click Me!")
+                    })
+                    //  added a double-click handler for fun
+                    .on("dblclick", function () {
+                        $("#p1").show(); 
+                        $(this).text("Click Me!") 
+                    })
+
+            });
+        
+            
+        </script>
+    </body>
+</html>
