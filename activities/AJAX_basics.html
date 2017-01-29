@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>IT202 - Activity: JSON Manipulation</title>
+        <link rel="stylesheet" href="../assets/document_styles.css" />
+    </head>
+    <body>
+        <h1 class="lab">Activity: AJAX</h1>
+        <div class="lab-intro">
+            <p class="lab-intro">In this activity, we'll practice AJAX calls using the City of Chicago Data Portal API and the jQuery $.ajax method.</p>
+        </div>
+        <div class="lab lab-section lab-instructions">
+             <h2>Instructions</h2>
+             <h3>Part 1 - Learning about the City of Chicago Data API</h3>
+            <ol>
+                <li>The City of Chicago - like many government, business, NGO and not-for-profit entities - makes data available through an API.  When working with a new API, we need to read the documentation and understand <ol type="a">
+                        <li>how to structure the request URL, and</li>
+                        <li>how the returned data is structured.</li>
+                    </ol>
+                    The City's data portal is at <a href="https://data.cityofchicago.org">https://data.cityofchicago.org/</a>.  Open that page in a new tab.
+                </li>
+                <li>After exploring the information on the home page, search for the "Food Inspections" dataset.  Find the result with the "Dataset" icon, and open the dataset.</li>
+                <li>The City uses software from Socrata (<a href="https://socrata.com/">https://socrata.com/</a>) to make city data available to the public, and the interface allows users to access the data in a variety of ways.  We're interested in the API access, so after exploring the interface, click the light blue "Export" button.
+                </li>
+                <li>Note that there are multiple options for exporting the data.  Expand the "SODA API" section, and note the following important items:
+                    <ol type="a">
+                        <li>The API Endpoint,</li>
+                        <li>the list of field names, and</li>
+                        <li>the documentation link.</li>
+                    </ol>
+                    Open the documentation.
+                </li>
+                <li>The documentation page provides information applicable to all Socrata API datasets as well as information specific to this dataset.  You should read through the page when you have time, but for now, scroll down to the field information, and expand the "zip" field information.</li>
+                <li>Read the "Simple Filters" section, copy the URL, and open it in a new tab.  This is the data that will be returned when we make an AJAX call to that URL. Note how we can filter the data by passing URL parameters with fieldnames and values.  <br><br>(If you know SQL, feel free to look at the "Query options" section to see how to do much more complex requests - even aggregate functions - by passing SQL clauses as URL parameters.)</li>
+                <li>
+                    Here's an AJAX example you can run in the console (because this page includes the jQuery library.)  Note that we're passing multiple URL parameters as an object that is the value of the <strong>data</strong> property.
+                    <br>
+                    <code><pre>
+                    $.ajax({
+                        url: "https://data.cityofchicago.org/resource/cwig-ma7x.json",
+                        type: "GET",
+                        data: {
+                          "$limit" : 50,
+                          "zip" : 60618
+                        }
+                    })
+                    .done(function(data){
+                      alert("Retrieved " + data.length + " records from the dataset!");
+                      console.log(data);
+                    });    
+                        
+                        
+                        
+                    </pre></code>
+                    
+                    The $.ajax method converts the returned text to a JavaScript object and exposes that object to the <strong>done</strong> handler;  you'll usually see it with the parameter name "data."<br><br>
+                    Since we logged "data" to the console, we can see the object and explore it. 
+                </li>
+                <li>
+                     Try adding an additional filter value.
+                </li>
+             </ol>
+             
+             <h3>Part 2 - Looping through the data</h3> 
+             <ol>
+                 <li>Since we have access to that data in our script, we're can do more than log the entire object; let's loop through the data.
+                     <br><br>
+                     Let's add an $.each loop to the "done" event. What are we looping through?  The "data" parameter passed to callback function. For each record, log the "dba_name" to the console.  Paste  the following inside the anonymous callback function for the "done" event.
+                     <code><pre>
+                     $.each(data, function (idx, val) {
+                         console.log(val.dba_name);
+                     });
+                     </pre></code>
+                 </li>                 
+             </ol>
+            <h3>Part 3 - Update the DOM</h3> 
+             <ol>
+                 <li>Finally, let's use the jQuery <strong>.append</strong> function to update the DOM.  Our initial output will be simple, but we need only make better choices regarding html and css to have a better layout.
+                     
+                     Replace the <code>console.log</code> statement inside the loop with <br>
+                     <code>$("body").append(val.dba_name + "<br>");</code>
+                 
+                 </li>
+             </ol>
+         
+        </div>
+        <div>
+           <code><pre>
+    var docs = [
+      {
+        "web_url": "http://cooking.nytimes.com/recipes/1018509-sole-meuniere",
+        "snippet": "The dish that made Julia Child fall in love with French cuisine, sole meunière highlights the simple flavors of fresh fish, butter, lemon and parsley. Fish is the center of the dish, so using a quality fillet is important: A true English Dover so...",
+        "lead_paragraph": "The dish that made Julia Child fall in love with French cuisine, sole meunière highlights the simple flavors of fresh fish, butter, lemon and parsley. Fish is the center of the dish, so using a quality fillet is important: A true English Dover sole is preferred. Clarified butter, which takes a few extra minutes to prepare, can take on heat without browning, making it ideal for pan-frying fish. A classic sole meunière is made with a bone-in fillet, but boneless sole is faster and easier.",
+        "abstract": null,
+        "print_page": null,
+        "blog": [],
+        "source": "du_recipe",
+        "multimedia": [
+          {
+            "caption": "A succulent fillet of white fish, pan-fried in clarified butter and served with a butter sauce.",
+            "url": "images/2017/01/13/dining/13COOKING-SOLE-MEUNIERE2/13COOKING-SOLE-MEUNIERE2-thumbStandard.jpg",
+            "rank": "1",
+            "height": 75,
+            "subtype": "thumbnail",
+            "legacy": [],
+            "type": "image",
+            "width": 75
+          },
+          {
+            "caption": "A succulent fillet of white fish, pan-fried in clarified butter and served with a butter sauce.",
+            "url": "images/2017/01/13/dining/13COOKING-SOLE-MEUNIERE2/13COOKING-SOLE-MEUNIERE2-articleLarge.jpg",
+            "rank": "1",
+            "height": 400,
+            "subtype": "large",
+            "legacy": [],
+            "type": "image",
+            "width": 600
+          }
+        ],
+        "headline": {
+          "name": "Sole Meunière"
+        },
+        "keywords": [],
+        "pub_date": "2017-02-13T05:00:00+0000",
+        "document_type": "recipe",
+        "news_desk": null,
+        "section_name": null,
+        "subsection_name": null,
+        "byline": [],
+        "type_of_material": "Recipe",
+        "_id": "58790d7095d0e0392607a9a3",
+        "word_count": "167",
+        "slideshow_credits": null
+      },
+      {
+        "web_url": "http://cooking.nytimes.com/recipes/1018501-red-berry-souffle",
+        "snippet": "This very light soufflé recipe, adapted from Julia Child, uses a base of syrupy fruit to flavor the egg whites, without the addition of fats or starches. And a combination of raspberries and strawberries makes it marvelously pink....",
+        "lead_paragraph": "This very light soufflé recipe, adapted from Julia Child, uses a base of syrupy fruit to flavor the egg whites, without the addition of fats or starches. And a combination of raspberries and strawberries makes it marvelously pink.",
+        "abstract": null,
+        "print_page": null,
+        "blog": [],
+        "source": "du_recipe",
+        "multimedia": [
+          {
+            "width": 75,
+            "url": "images/2017/01/13/dining/13SOUFLE-19/13SOUFLE-19-thumbStandard.jpg",
+            "rank": "1",
+            "height": 75,
+            "subtype": "thumbnail",
+            "legacy": [],
+            "type": "image"
+          },
+          {
+            "width": 600,
+            "url": "images/2017/01/13/dining/13SOUFLE-19/13SOUFLE-19-articleLarge.jpg",
+            "rank": "1",
+            "height": 401,
+            "subtype": "large",
+            "legacy": [],
+            "type": "image"
+          }
+        ],
+        "headline": {
+          "name": "Red Berry Soufflé"
+        },
+        "keywords": [],
+        "pub_date": "2017-02-13T05:00:00+0000",
+        "document_type": "recipe",
+        "news_desk": null,
+        "section_name": null,
+        "subsection_name": null,
+        "byline": [],
+        "type_of_material": "Recipe",
+        "_id": "587e9dbe95d0e0392607b3b1",
+        "word_count": "348",
+        "slideshow_credits": null
+      },
+      {
+        "web_url": "http://cooking.nytimes.com/recipes/1018499-bittersweet-chocolate-souffle",
+        "snippet": "Dark and intense in flavor, yet with a light and custardy texture, a chocolate soufflé is an eternal showstopper of a dessert. Be sure to use excellent bittersweet chocolate, but if you prefer a slightly sweeter soufflé, feel free to substitute ...",
+        "lead_paragraph": "Dark and intense in flavor, yet with a light and custardy texture, a chocolate soufflé is an eternal showstopper of a dessert. Be sure to use excellent bittersweet chocolate, but if you prefer a slightly sweeter soufflé, feel free to substitute milk chocolate for all or part of the bittersweet.",
+        "abstract": null,
+        "print_page": null,
+        "blog": [],
+        "source": "du_recipe",
+        "multimedia": [
+          {
+            "caption": "A savory or sweet dish in which a roux or purée is mixed with egg yolks and whipped whites and baked until light and ethereal.",
+            "url": "images/2017/01/13/dining/13SOUFLE-3/13SOUFLE-3-thumbStandard.jpg",
+            "rank": "1",
+            "height": 75,
+            "subtype": "thumbnail",
+            "legacy": [],
+            "type": "image",
+            "width": 75
+          },
+          {
+            "caption": "A savory or sweet dish in which a roux or purée is mixed with egg yolks and whipped whites and baked until light and ethereal.",
+            "url": "images/2017/01/13/dining/13SOUFLE-3/13SOUFLE-3-articleLarge.jpg",
+            "rank": "1",
+            "height": 400,
+            "subtype": "large",
+            "legacy": [],
+            "type": "image",
+            "width": 600
+          }
+        ],
+        "headline": {
+          "name": "Bittersweet Chocolate Soufflé"
+        },
+        "keywords": [],
+        "pub_date": "2017-02-13T05:00:00+0000",
+        "document_type": "recipe",
+        "news_desk": null,
+        "section_name": null,
+        "subsection_name": null,
+        "byline": [],
+        "type_of_material": "Recipe",
+        "_id": "5879530c95d0e0392607aa81",
+        "word_count": "254",
+        "slideshow_credits": null
+      }
+    ] 
+           </pre></code> 
+            
+        <code style="color:white;"><pre>
+            $.each(docs, function (index, value) {
+                console.log("***********"); 
+                console.log(value.web_url);                 
+                 $.each(value.multimedia, function (i,v){ 
+            		console.log(v.url);
+                 })                   
+            });
+            
+            
+        </pre></code>    
+            
+            
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </body>
+</html>

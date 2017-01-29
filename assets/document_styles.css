@@ -89,6 +89,10 @@ h1.lab {
     padding: 10px;
 }
 
+.lab-instructions ol li {
+    margin-bottom: 10px;
+}
+
 .lab-resources {
     border-color:  #00205b;
 }
