@@ -1,0 +1,11 @@
+// lecture data
+
+var lectures = {};
+lectures.push ({
+    number: 6,
+    topic: "Working with Data",
+    subtopic: "JSON, AJAX and looping",
+    questions: [],
+    link : "standard"
+});
+
