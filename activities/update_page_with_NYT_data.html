@@ -7,239 +7,42 @@
         <link rel="stylesheet" href="../assets/document_styles.css" />
     </head>
     <body>
-        <h1 class="lab">Activity: JSON Manipulation</h1>
+        <h1 class="lab">Activity: Updating a page with NYT data</h1>
         <div class="lab-intro">
-            <p class="lab-intro">In this activity, we'll practice accessing and modifying a complex JSON object.</p>
+            <p class="lab-intro">In this activity, we'll use data retrieved from the NYT Article Search API to update a page with the headline, byline, publication date, lead paragraph, image and link to the NYT site for each article returned.</p>
         </div>
         <div class="lab lab-section lab-instructions">
              <h2>Instructions</h2>
-             <h3>Part 1 - Examining an object</h3>
+             <h3>Part 1 - Examining the API</h3>
             <ol>
-                <li>The JavaScript at the bottom of the page represents an array of NYT articles;  this is a sample from the NYT Article Search API.</li>
-                <li>Open the JavaScript console, copy the script below, and paste and execute it in the console.</li>
-                <li>There is no value returned in response to creating a variable, which is why "undefined" is displayed, but you (most likely) successfully created the variable.   Type the variable name at the prompt, and hit enter.
-                </li>
-                <li>Note the display in the console, indicating that <strong>docs</strong> is an object. Click the expansion arrow. </li>
-                <li>Note that <strong>docs</strong> is an array;  the display shows the array's contents, along with its one property (<strong>length</strong>) and the JavaScript methods for an array object (under the <strong>__proto__</strong> array.)  </li>
-                <li>Expand <strong>docs[0]</strong> to see the structure of the first article record;  note that it contains not only strings, numbers and booleans but also arrays and objects, and that those may contain additional complex objects.</li>
-                <li>
-                    When working with JSON objects, we need to understand the structure of the data so that we can determine how to programmatically access the items we want.  Enter <code>docs[0]</code> in the console and see that that one article object is returned.  Enter <code>docs[0].snippet</code> to retrieve the value for that property.  
+                <li>Use the NYT API console to test your API key and to see the $.ajax script to use.
                 </li>
                 <li>
-                     We can access any property by chaining the object references, using either the dot notation or the bracket notation.
-                     <p class="alert alert-danger"><strong>If the property names in your data include spaces, you must use the bracket notation.</strong></p>
-                     <code>docs[0].multimedia[1]["caption"]</code> returns the caption for the second image for this article.
-                     <br> How would you access the value of the name property of the headline object of the second article in the array?
+                    Explore the data retrieved to see how to access the elements we need.
                 </li>
              </ol>
              
-             <h3>Part 2 - Adding properties to an object</h3> 
+             <h3>Part 2 - Adding script to a file</h3> 
              <ol>
-                 <li>We can easily add properties to an object using either the dot notation or the bracket notation.
-                     Execute <code>docs[0].multimedia[1].color = "yellow"; docs[0].multimedia[1]["flavor"] = "chocolate"</code>, then explore that object to see that those properties have been added.  <p class="alert alert-danger"><strong>If the property names in your data include spaces, you must use the bracket notation.</strong></p>
-                 </li>                 
-                 <li>And of course, we can add properties with values that are complex objects.  Execute 
-                     <code>docs[0].multimedia[1].meetingDays = ["Monday","Wednesday"];
-                 </code>
-                     How would access that second meeting day value?
+                 <li>Navigate to <a href="https://heymrhayes.github.io/it202_spring_2017/examples/it202_jumbotron.html">https://heymrhayes.github.io/it202_spring_2017/examples/it202_jumbotron.html</a>, copy the source and use it to create a new file in your <code>activities</code> folder.
                  </li>
-                 
+                 <li>Add a script element at the end of <strong>body</strong> element.</li>
+                 <li>Paste the $.ajax code from the NYT console into the block.</li>
+
+                 <li>Add a <code>console.log</code> statement as the first line of the <strong>done</strong> event handler to output the returned data.</li>
              </ol>
-            <h3>Part 3 - Using $.each to loop through an object</h3> 
+            <h3>Part 3 - Using $.each to loop through the data</h3> 
              <ol>
-                 <li>The jQuery <strong>$.each()</strong> utility method (<a href="http://api.jquery.com/jQuery.each/">http://api.jquery.com/jQuery.each/</a> lets us easily loop through objects and arrays.  Enter <code>$.each(docs)</code> in the console.  Note the error; $.each requires a second parameter, the callback function to be executed for each item in the array or object.
+                 <li>The jQuery <strong>$.each()</strong> utility method (<a href="http://api.jquery.com/jQuery.each/">http://api.jquery.com/jQuery.each/</a> lets us easily loop through objects and arrays.  Add an <code>$.each()</code> statement to the <strong>done</strong> event handler to loop through the returned data.
                  </li>
-                 <li>$.each() exposes two values for us to use inside the callback function - the index position and the value at that position.  (If you're looping through and object, the two values are the property/key and value for that property/key.) This code includes a callback to log the snippet value for each document.
-                     <pre>
-                         $.each(docs, function (index, value) {
-                             console.log(value.snippet);
-                         });
-                     </pre>
-                     What will this do?
-                     <pre>
-                         $.each(docs, function (index, value) {
-                             console.log(index);
-                         });
-                     </pre>
+                 <li>$.each() exposes two values for us to use inside the callback function - the index position and the value at that position.  Modify the callback function with a <code>console.log</code> statement to output the <code>pub_date</code> value.
                 </li>
-                <li>
-                    Write a loop to output the web url for each article.<br>
-                </li>
-                <li>When the item we're looping through is an object, the first parameter of the callback is the property/key name.  This code outputs the property names for each article.
-                    <pre>
-                        $.each(docs, function (index, value) {
-                             console.log("article " + index + ": ****************************");
-                             $.each(value, function (k,v){ 
-                        		console.log(k);
-                             })                   
-                        });
-                        
-                    </pre></prep>
-                    
-                    
-                    
-                </li>
-                
-                 <li>
-                    How would you output each of the image urls for each article? (After you try for a bit, mouse over the blank space at the bottom to copy/see one answer.)
-                </li>
+                <h3>Part 4 - Update the DOM for each article</h3>  
+                <li>The logic will be: find an element to use as a template, clone it, update the clone's elements with data values, and insert that clone into the DOM at the appropriate point.</li>
          
          
          
         </div>
-        <div>
-           <code><pre>
-    var docs = [
-      {
-        "web_url": "http://cooking.nytimes.com/recipes/1018509-sole-meuniere",
-        "snippet": "The dish that made Julia Child fall in love with French cuisine, sole meunière highlights the simple flavors of fresh fish, butter, lemon and parsley. Fish is the center of the dish, so using a quality fillet is important: A true English Dover so...",
-        "lead_paragraph": "The dish that made Julia Child fall in love with French cuisine, sole meunière highlights the simple flavors of fresh fish, butter, lemon and parsley. Fish is the center of the dish, so using a quality fillet is important: A true English Dover sole is preferred. Clarified butter, which takes a few extra minutes to prepare, can take on heat without browning, making it ideal for pan-frying fish. A classic sole meunière is made with a bone-in fillet, but boneless sole is faster and easier.",
-        "abstract": null,
-        "print_page": null,
-        "blog": [],
-        "source": "du_recipe",
-        "multimedia": [
-          {
-            "caption": "A succulent fillet of white fish, pan-fried in clarified butter and served with a butter sauce.",
-            "url": "images/2017/01/13/dining/13COOKING-SOLE-MEUNIERE2/13COOKING-SOLE-MEUNIERE2-thumbStandard.jpg",
-            "rank": "1",
-            "height": 75,
-            "subtype": "thumbnail",
-            "legacy": [],
-            "type": "image",
-            "width": 75
-          },
-          {
-            "caption": "A succulent fillet of white fish, pan-fried in clarified butter and served with a butter sauce.",
-            "url": "images/2017/01/13/dining/13COOKING-SOLE-MEUNIERE2/13COOKING-SOLE-MEUNIERE2-articleLarge.jpg",
-            "rank": "1",
-            "height": 400,
-            "subtype": "large",
-            "legacy": [],
-            "type": "image",
-            "width": 600
-          }
-        ],
-        "headline": {
-          "name": "Sole Meunière"
-        },
-        "keywords": [],
-        "pub_date": "2017-02-13T05:00:00+0000",
-        "document_type": "recipe",
-        "news_desk": null,
-        "section_name": null,
-        "subsection_name": null,
-        "byline": [],
-        "type_of_material": "Recipe",
-        "_id": "58790d7095d0e0392607a9a3",
-        "word_count": "167",
-        "slideshow_credits": null
-      },
-      {
-        "web_url": "http://cooking.nytimes.com/recipes/1018501-red-berry-souffle",
-        "snippet": "This very light soufflé recipe, adapted from Julia Child, uses a base of syrupy fruit to flavor the egg whites, without the addition of fats or starches. And a combination of raspberries and strawberries makes it marvelously pink....",
-        "lead_paragraph": "This very light soufflé recipe, adapted from Julia Child, uses a base of syrupy fruit to flavor the egg whites, without the addition of fats or starches. And a combination of raspberries and strawberries makes it marvelously pink.",
-        "abstract": null,
-        "print_page": null,
-        "blog": [],
-        "source": "du_recipe",
-        "multimedia": [
-          {
-            "width": 75,
-            "url": "images/2017/01/13/dining/13SOUFLE-19/13SOUFLE-19-thumbStandard.jpg",
-            "rank": "1",
-            "height": 75,
-            "subtype": "thumbnail",
-            "legacy": [],
-            "type": "image"
-          },
-          {
-            "width": 600,
-            "url": "images/2017/01/13/dining/13SOUFLE-19/13SOUFLE-19-articleLarge.jpg",
-            "rank": "1",
-            "height": 401,
-            "subtype": "large",
-            "legacy": [],
-            "type": "image"
-          }
-        ],
-        "headline": {
-          "name": "Red Berry Soufflé"
-        },
-        "keywords": [],
-        "pub_date": "2017-02-13T05:00:00+0000",
-        "document_type": "recipe",
-        "news_desk": null,
-        "section_name": null,
-        "subsection_name": null,
-        "byline": [],
-        "type_of_material": "Recipe",
-        "_id": "587e9dbe95d0e0392607b3b1",
-        "word_count": "348",
-        "slideshow_credits": null
-      },
-      {
-        "web_url": "http://cooking.nytimes.com/recipes/1018499-bittersweet-chocolate-souffle",
-        "snippet": "Dark and intense in flavor, yet with a light and custardy texture, a chocolate soufflé is an eternal showstopper of a dessert. Be sure to use excellent bittersweet chocolate, but if you prefer a slightly sweeter soufflé, feel free to substitute ...",
-        "lead_paragraph": "Dark and intense in flavor, yet with a light and custardy texture, a chocolate soufflé is an eternal showstopper of a dessert. Be sure to use excellent bittersweet chocolate, but if you prefer a slightly sweeter soufflé, feel free to substitute milk chocolate for all or part of the bittersweet.",
-        "abstract": null,
-        "print_page": null,
-        "blog": [],
-        "source": "du_recipe",
-        "multimedia": [
-          {
-            "caption": "A savory or sweet dish in which a roux or purée is mixed with egg yolks and whipped whites and baked until light and ethereal.",
-            "url": "images/2017/01/13/dining/13SOUFLE-3/13SOUFLE-3-thumbStandard.jpg",
-            "rank": "1",
-            "height": 75,
-            "subtype": "thumbnail",
-            "legacy": [],
-            "type": "image",
-            "width": 75
-          },
-          {
-            "caption": "A savory or sweet dish in which a roux or purée is mixed with egg yolks and whipped whites and baked until light and ethereal.",
-            "url": "images/2017/01/13/dining/13SOUFLE-3/13SOUFLE-3-articleLarge.jpg",
-            "rank": "1",
-            "height": 400,
-            "subtype": "large",
-            "legacy": [],
-            "type": "image",
-            "width": 600
-          }
-        ],
-        "headline": {
-          "name": "Bittersweet Chocolate Soufflé"
-        },
-        "keywords": [],
-        "pub_date": "2017-02-13T05:00:00+0000",
-        "document_type": "recipe",
-        "news_desk": null,
-        "section_name": null,
-        "subsection_name": null,
-        "byline": [],
-        "type_of_material": "Recipe",
-        "_id": "5879530c95d0e0392607aa81",
-        "word_count": "254",
-        "slideshow_credits": null
-      }
-    ] 
-           </pre></code> 
-            
-        <code style="color:white;"><pre>
-            $.each(docs, function (index, value) {
-                console.log("***********"); 
-                console.log(value.web_url);                 
-                 $.each(value.multimedia, function (i,v){ 
-            		console.log(v.url);
-                 })                   
-            });
-            
-            
-        </pre></code>    
-            
-            
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     </body>
 </html>

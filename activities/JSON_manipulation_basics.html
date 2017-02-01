@@ -49,7 +49,7 @@
              <ol>
                  <li>The jQuery <strong>$.each()</strong> utility method (<a href="http://api.jquery.com/jQuery.each/">http://api.jquery.com/jQuery.each/</a> lets us easily loop through objects and arrays.  Enter <code>$.each(docs)</code> in the console.  Note the error; $.each requires a second parameter, the callback function to be executed for each item in the array or object.
                  </li>
-                 <li>$.each() exposes two values for us to use inside the callback function - the index position and the value at that position.  (If you're looping through and object, the two values are the property/key and value for that property/key.) This code includes a callback to log the snippet value for each document.
+                 <li>$.each() exposes two values for us to use inside the callback function - the index position and the value at that position.  (If you're looping through an object, the two values are the property/key and value for that property/key.) This code includes a callback to log the snippet value for each document.
                      <pre>
                          $.each(docs, function (index, value) {
                              console.log(value.snippet);
