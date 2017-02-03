@@ -195,7 +195,7 @@
 
       function getByline(record) {
         
-        var result = "";
+        var bylineDate, result = "";
         
         // we need to ensure the byline element exists before 
         //    trying to access a property;  
@@ -205,7 +205,8 @@
           result = record.byline.original || "";
         }
 
-        result += " " + record.pub_date;
+        bylineDate = new Date(record.pub_date);
+        result += " " + bylineDate.toDateString();
         return result;
       }
       
