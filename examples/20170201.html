@@ -30,6 +30,10 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <style>
+      .byline {font-size: .8em;}
+    </style>
   </head>
 
   <body>
@@ -73,7 +77,8 @@
       <div class="row">
         <div class="col-md-6">
           <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p class="byline"></p>
+          <p class="leadParagraph">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
           <p><a class="btn btn-default" href="" target="_blank" role="button">View on NYT</a></p>
         </div>
 
@@ -125,7 +130,15 @@
             
             // update values
             clone.find("h2").text(val.headline.main);
-            clone.find("p:eq(0)").text(val.lead_paragraph);
+            
+            
+            clone.find("p.byline").text(getByline(val));
+            
+            // had to replace this when I inserted a new "first" p in the template
+            //clone.find("p:eq(0)").text(val.lead_paragraph);
+            clone.find("p.leadParagraph").text(val.lead_paragraph);
+            
+            
             clone.find("p a").attr("href", val.web_url);
             
             if (getImageUrl(val) !== "") {
@@ -180,8 +193,22 @@
         return result;
       }
 
+      function getByline(record) {
+        
+        var result = "";
+        
+        // we need to ensure the byline element exists before 
+        //    trying to access a property;  
+        if (record.byline) {
+          // using the OR operator to return the data, if it exists
+          //    or the empty string
+          result = record.byline.original || "";
+        }
 
-
+        result += " " + record.pub_date;
+        return result;
+      }
+      
 
       
     </script>
