@@ -113,7 +113,7 @@
           url: url,
           method: 'GET',
         }).done(function(result) {
-          //console.log(result);
+          console.log(result);
           
           $.each(result.response.docs, function(idx, val) {
             
@@ -126,9 +126,13 @@
             // update values
             clone.find("h2").text(val.headline.main);
             clone.find("p:eq(0)").text(val.lead_paragraph);
-            
             clone.find("p a").attr("href", val.web_url);
-
+            
+            if (getImageUrl(val) !== "") {
+              clone.append("<img>");
+              
+              clone.find("img").attr("src", getImageUrl(val));
+            } 
 
             // insert into DOM
             template.parent().append(clone);
@@ -155,8 +159,26 @@
       });
     
     
-    
-    
+      /*
+          function getImageUrl
+          
+          returns the first image item in the multimedia array
+      */
+      function getImageUrl (record) {
+        
+        var result = "";
+        
+        // loop through the multimedia objects
+        $.each(record.multimedia, function(index,value){
+          //console.log(value.type);
+          if (value.type == "image") {
+            //console.log(value.url);
+            result = "http://www.nytimes.com/" + value.url;
+            return false;   // to exit loop
+          } 
+        })
+        return result;
+      }
 
 
 
