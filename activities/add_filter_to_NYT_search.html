@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>IT202 - Activity: Add User Filter to the NYT Article Search</title>
+        <link rel="stylesheet" href="../assets/document_styles.css" />
+    </head>
+    <body>
+        <h1 class="lab">Activity: Add User Filter to the NYT Article Search</h1>
+        <div class="lab-intro">
+            <p class="lab-intro">In this activity, we'll update the NYT article search page to let the user enter a search term.</p>
+            <p class="lab-intro">We'll update the script to run in response to a button click event rather than on page load.  When the button is clicked, we'll read the value of the input box and use that to construct the URL for the AJAX call.</p>
+        </div>
+        <div class="lab lab-section lab-instructions">
+             <h2>Instructions</h2>
+             <h3>Part 1 - Edit the HTML</h3>
+            <ol>
+                <li>Open either yours or mine (<a href="https://heymrhayes.github.io/it202_spring_2017/examples/20170201.html">https://heymrhayes.github.io/it202_spring_2017/examples/20170201.html</a>, and save the content in a new file.
+                </li>
+                <li>
+                    Add a text input box; give it an <code>id</code> attribute with a value of <code>txtQuery</code>.
+                </li>
+                <li>
+                    Add a button; give it an <code>id</code>id attribute with a value of <code>btnSearch</code>.
+                </li>
+             </ol>
+             
+             <h3>Part 2 - Run on button click</h3> 
+             <ol>
+                 <li>Inside the jQuery DOM ready function, add a click event handler for the button.  Create the anonymous function; note where it ends. 
+                 </li>
+                 <li>Move the entire script that previously ran at page load into the anonymous function you just created.</li>
+                 <li>Test and verify that you're getting the same article set and display as before;  the only difference is that it should happen in response to a button click.</li>
+
+             </ol>
+            <h3>Part 3 - Get the search term and update the URL</h3> 
+             <ol>
+                 <li>The jQuery <strong>val()</strong> function returns the value(s) for the specified element(s).  In the first line of the click event handler, read the value of the input box and store it in a variable named <code>query</code>.
+                 </li>
+                 <li>Wherever you're constructing the URL, replace any hard-coded value with the variable.
+                </li>
+                <li>Test.   What happens when you make subsequent searches?</li>
+                </ol>
+                <h3>Part 4 - Remove prior search results on new search</h3>  
+                <p>We don't want to see the old search results when we make a new search, so we need to clear the old contents.  </p>
+                <ol>
+                <li>
+                    How? TBD
+                </li>
+                 </ol>
+             
+         
+        </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </body>
+</html>
