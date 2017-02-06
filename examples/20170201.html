@@ -33,6 +33,8 @@
     
     <style>
       .byline {font-size: .8em;}
+      
+      .articleTemplate {display:none;}
     </style>
   </head>
 
@@ -73,9 +75,10 @@
     </div>
 
     <div class="container">
+      <img id="loading" src="http://blog.teamtreehouse.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif" alt="loading">
       <!-- Example row of columns -->
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 articleTemplate">
           <h2>Heading</h2>
           <p class="byline"></p>
           <p class="leadParagraph">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
@@ -118,20 +121,17 @@
           url: url,
           method: 'GET',
         }).done(function(result) {
-          console.log(result);
+          //console.log(result);
+          
+          $("#loading").hide();
           
           $.each(result.response.docs, function(idx, val) {
-            
-            //console.log(val.pub_date);
 
-            
-            // clone it
+            // clone the template element
             var clone = template.clone();
             
-            // update values
+            // update values in the clone
             clone.find("h2").text(val.headline.main);
-            
-            
             clone.find("p.byline").text(getByline(val));
             
             // had to replace this when I inserted a new "first" p in the template
@@ -149,6 +149,7 @@
 
             // insert into DOM
             template.parent().append(clone);
+            clone.show();
             
           });
           
