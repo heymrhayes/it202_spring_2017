@@ -62,7 +62,7 @@
         */
         
         $.each(apiData, function(i,v) {
-          data.addRow([v.zip, v.sum_acres]);
+          data.addRow([v.zip, parseFloat(v.sum_acres)]);
         })
         
         
