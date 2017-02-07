@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>NYT Article Search</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -68,16 +68,20 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <h1>NYT Article Search</h1>
+        <p>Enter a search term to get started.  </p>
         <p>
           <input type="text" id="txtQuery" placeholder="Enter a search term">
+          <select id="selOrder">
+            <option value="newest">newest</option>
+            <option value="oldest">oldest</option>
+          </select>
           <a id="btnSearch" class="btn btn-primary btn-lg" role="button">Search</a></p>
       </div>
     </div>
 
     <div class="container">
-      <img id="loading" src="http://blog.teamtreehouse.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif" alt="loading">
+      <!--<img id="loading" src="http://blog.teamtreehouse.com/wp-content/uploads/2015/05/InternetSlowdown_Day.gif" alt="loading">-->
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-6 articleTemplate">
@@ -117,7 +121,7 @@
           
           var query = $("#txtQuery").val();
           console.log(query);
-          
+          var order = $("#selOrder").val();
           
           
           // find template
@@ -127,7 +131,8 @@
           var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
           url += '?' + $.param({
             'api-key': "171742565481ab1fc4d4ed5e38f63d1c:2:60955541",
-            'q': query
+            'q': query,
+            'sort': order
           });
           $.ajax({
             url: url,
@@ -141,7 +146,7 @@
   
               // clone the template element
               var clone = template.clone();
-              
+              clone.removeClass("articleTemplate");
               clone.addClass("article");
               // update values in the clone
               clone.find("h2").text(val.headline.main);
