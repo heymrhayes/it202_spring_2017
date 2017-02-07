@@ -2,13 +2,44 @@
   <head>
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+    
     <script type="text/javascript">
+      /*
+        call getData when charts lib is loaded;  
+        call drawChart when AJAX data is returned
+      
+      
+      
+      */
+      function getData () {
+        
+        // using aggregation url from class
+        var url = "https://data.cityofchicago.org/resource/4xwe-2j3y.json?$query=SELECT%20zip,sum(acres)%20GROUP%20BY%20zip%20ORDER%20BY%20zip";
+        
+        $.ajax({
+            url: url,
+            method: 'GET',
+          }).done(function(data) {
+            console.log(data);
+            drawChart(data);
+          });     
+
+
+
+      }
+
+
+
 
       // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
 
       // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(getData);
 
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
