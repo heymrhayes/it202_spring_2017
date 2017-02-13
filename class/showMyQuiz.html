@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Show My Quiz</title>
+    </head>
+    <body>
+    
+    <h1>Retrieve My Data</h1>
+    
+    <div id="chooseQuiz">
+        <select id="selQuiz">
+            <option value="Quiz 2">Quiz 2</option>
+            <option value="Quiz 1">Quiz 1</option>
+        </select>
+        <button type="button" id="btnGetData">Get My Data</button>
+    </div>
+    <p id="results"></p>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        var baseUrl = 
+            "https://script.google.com/macros/s/AKfycbzCTe30jJTdcsHWRXvoohWGGE_MX5TTu9cjEOI-zNDLcH8I-OZt/exec?";
+        
+        var docIds = {
+            quizzes: "1Rg9eFL8z6YfMqzkULJLOg62LwoC9RQvwmM7I3O5U7mE"
+        }
+        
+        
+        $(function() {
+               $("#btnGetData").on("click", function() {
+                   
+                   $.ajax({
+                        url: baseUrl,
+                        dataType: 'jsonp',
+                        jsonpCallback: 'processResponse',
+                        data: { docId: docIds.quizzes, 
+                                sheetName: $("#selQuiz").val()
+                        }
+                    });                   
+                   
+               })
+               
+               
+               
+
+        })
+        
+        function processResponse(data) {
+            if (data.length == 0) {
+               $("#results").text("no records found");
+               return false;
+            }
+            
+            var html;
+            
+            $("h1").append(" for " + data[0]["Email Address"]);
+            
+            $("#results").append("Number of records found: " + data.length);
+            $.each(data, function (idx,val) {
+                html = "<hr>";
+                $.each(val, function(k,v){
+                    html += k + ": " + v + "<br>";
+                })
+                $("#results").append(html);
+            })
+            
+            
+        }
+    </script>
+
+    </body>
+</html>
