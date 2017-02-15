@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>IT202 - Project 3</title>
+        <link rel="stylesheet" href="../../assets/document_styles.css" />
+    </head>
+    <body>
+        <h1 class="lab">Project 3: Simple Scrolling Game</h1>
+        <div class="lab-intro">
+            <p class="lab-intro">
+                In this project, you'll demonstrate knowledge of JavaScript and the HTML5 Canvas element by making a simple scrolling game.
+            </p>
+            <p class="lab-intro">
+                Your file should be <code>/projects/project3.html</code>.  Your game should have the following features:</p> 
+                <ol>
+                    <li>A "Welcome" screen with a game name and instructions. When the user clicks the canvas, the game displays and starts.</li>
+                    <li>A player character on the left side of the screen that moves only vertically and which the player controls using the up/down arrow keys;</li>
+                    <li>"Harm" characters which move from right to left and which, upon collision with the player, result in a loss the player's lives;</li>
+                    <li>"Benefit" characters which also move from right to left and which, upon collision with the player, adds points to the score;</li>
+                    <li>Display of lives left and score on the top of the screen;</li>
+                    <li>A "Game Over" screen when the player has used their last life.</li>
+                    <li>One type of character (player, harm or benefit) must be an image.</li>
+                </ol>
+   
+        </div>
+        <div class="lab lab-section lab-instructions">
+            <h2>Hints/Suggestions</h2>
+            <ol>
+                <li>To start, get a single item to move from right to left across your canvas.</li>
+                <li>When it gets to the left edge, move it back to right side and set it's y position randomly.</li>
+                <li>Create an array of these items, using a constructor to create each one; use a parameter for <strong>type</strong> of character (harm or benefit.)</li>
+                
+                <li>Get a player character to move up and down in response to arrow keys.</li>
+                <li>Create and display (with labels) variables for score and lives left.</li>
+                <li>Get collision testing working;  upon collision, check the type of the object that collided, and update the variables accordingly.</li>
+                <li>Upon collision, display a screen with a relevant message and continue the game when the user clicks the canvas.</li>
+                <li>When the lives left are negative, display a Game Over message.</li>
+                
+                <li>Get started early.</li>
+                <li>Ask questions on Piazza (I don't expect you to have all the answers.)</li>
+                <li>Test step by step.</li>
+               
+                <li>Save and push to your GitHub repo.</li>
+             </ol>
+      </div>
+      <div class="lab  lab-section lab-resources">
+          <h2>Evaluation</h2>
+          <p>25% for characters, display text and animation</p>
+          <p>25% for collision handling</p>
+          <p>25% for message screens (</p>
+          
+      </div>
+    </body>
+</html>
