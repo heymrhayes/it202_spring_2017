@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>IT202 - Activity: JSON Manipulation</title>
+        <link rel="stylesheet" href="../assets/document_styles.css" />
+    </head>
+    <body>
+        <h1 class="lab">Activity: Serving Data from a Google Spreadsheet</h1>
+        <div class="lab-intro">
+            <p class="lab-intro">In this activity, you'll learn how to use Google Apps Script to create an API to serve data from a Google Spreadsheet.</p>
+        </div>
+        <div class="lab lab-section lab-instructions">
+             <h2>Instructions</h2>
+             <h3>Part 1 - Getting the example documents</h3>
+            <ol>
+                <li>Navigate to <a href="https://docs.google.com/spreadsheets/d/1m4tUdQoejUJdHc-48Smfd4z_3geAs6yB4oRh0ncdh3w/edit?usp=sharing">https://docs.google.com/spreadsheets/d/1m4tUdQoejUJdHc-48Smfd4z_3geAs6yB4oRh0ncdh3w/edit?usp=sharing</a> and make a copy.  (I've had to share this so that you can view/copy, but make sure your copy is not shared with anyone.)
+                </li>
+                <li>
+                    Navigate to <a href="google-web-app-as-spreadsheet-api.html">google-web-app-as-spreadsheet-api.html</a>.  View the source, and copy it into a new file named <code>google-sheet-api.html</code> in your activies folder.
+                </li>
+             </ol>
+             
+             <h3>Part 2 - Google Apps Script</h3> 
+             <ol>
+                 <li>From the spreadsheet menu, select <code>Tools > Script Editor</code> to open the Google Apps scripting editor.
+                 </li>
+                 <li>When published as a web app, a Google Apps script can respond to HTTP GET and POST requests (<a href="https://developers.google.com/apps-script/guides/web">https://developers.google.com/apps-script/guides/web</a>  The <code>doGet</code> function responds to GET requests.  Open your <code>google-sheet-api.html</code> page, and click the button to retrieve the data from <em>my</em> sample spreadsheet. </li>
+                 <li>Set a breakpoint at line 37, and run the <code>testGet</code> function in debug mode. </li>
+             </ol>
+            <h3>Part 3 - Publish as a Web App</h3> 
+             <ol>
+                 <li>From the menu, select <code>Publish > Deploy as web app</code>.  Set the app to execute under your account (so that it can read values from the sheet) but set it to be accessible by <code>Anyone, even anonymous</code> so that anyone can use your API.
+                 </li>
+                 <li>Copy the web app url, paste it in a new browser tab, and view the result.
+                </li>
+                <li>Update your <code>google-sheet-api.html</code> file to use <em>your</em> web app URL, and verify that it works;  change a couple of values in the spreadsheet so that you're sure.
+                    
+                </li>
+                
+                
+                </ol>
+                <h3>Part 4 - Make it your own</h3>  
+                <ol>
+                <li>Change the spreadsheet data and column names and verify that your api still works.</li>
+                 </ol>
+             
+         
+        </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    </body>
+</html>
