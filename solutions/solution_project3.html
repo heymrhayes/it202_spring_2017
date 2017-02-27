@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Partial Solution for Project 2</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="https://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/examples/jumbotron/jumbotron.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="https://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    
+    <style>
+      #divMap{height: 500px;}
+    </style>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Partial Solution for Project 3</h1>
+        <p>This sample solution creates a game object, with various properties and methods.  You could build your game differently, but this avoids having to pass a lot of objects between functions.  I broke mine up into different functions as I was building it;  it seemed the easier way that putting everything inside the animation loop.</p>
+        <p>The player and the scrollers are objects, the latter an array of scroller objects.  With this strategy, we can easily change the number of each type of item (based on levels or something else) or create new types of items at different levels.  </p>
+        <p>A complete student project would need at least one object type to show an image and would need some theme/concept (underwater, space, campus, etc.)</p>
+        <p>Restarting the game doesn't work at the moment.</p>
+        
+        
+       </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+          
+        </div>
+        
+        
+        
+        
+    </div>
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"><\/script>')</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="https://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+  
+    <script>
+      var globalGame;
+      $(function() {
+        
+        
+        // create canvas element, 3/4 screen width
+        var wWidth = $(window).width();
+        var cWidth = parseInt(wWidth*.75);  
+        var cHeight = cWidth/2;
+        
+        //cWidth = parseInt(wWidth*.25); // made it small for testing
+
+        
+        // create the element programmatically after we determine screen size
+        var newCanvas = $("<canvas>");
+        newCanvas.attr("width", cWidth);
+        newCanvas.attr("height", cHeight);
+        $(".row").append(newCanvas);
+        
+        // get the DOM object from the jQuery object
+        var gameCanvas = $("canvas")[0];
+        
+        
+        // one way to keep things clean;  game as an object
+        var game = {
+          state: "start", 
+          score: 0,
+          numLives: 2, 
+          numHarms: 3, 
+          numBenefits: 3,
+          scrollers: [],
+          speed: 1, 
+          player: {x: 50, y: 0, lives: 0},
+          canvas: gameCanvas, 
+          ctx: gameCanvas.getContext("2d") };
+
+        
+        
+        /********************************************** 
+          restart game
+        **********************************************/
+        game.restart = function() {
+          //  reset objects' positions
+          //  reset score and lives
+          
+        }
+        
+        
+        
+        
+        /********************************************** 
+          start game
+        **********************************************/
+        game.start = function () {
+          this.displayMessage("Click to Start Game");
+          this.player.y = this.canvas.height/2;
+          this.player.lives = this.numLives;
+          
+          // create harms
+          for (var i=0; i<this.numHarms; i++) {
+            this.scrollers.push( new Scroller("harm",
+                              this.canvas.width + Math.random()*200,
+                              Math.random()*this.canvas.height) )
+          }
+          
+          // create benefits
+          for (var i=0; i<this.numBenefits; i++) {
+            this.scrollers.push( new Scroller("benefit",
+                              this.canvas.width + Math.random()*200,
+                              Math.random()*this.canvas.height) )
+          }
+
+        }
+        
+        
+        
+        
+        
+        /********************************************** 
+          constructor for new scroller objects
+        **********************************************/
+        function Scroller(strType, x, y) {
+          this.x = x;
+          this.y = y; 
+          this.type = strType;
+          this.speed = 1;
+        }
+        
+        
+        /********************************************** 
+            display screen messages
+        **********************************************/ 
+        game.displayMessage = function (strMessage) {
+          this.ctx.fillStyle = "yellow";
+          this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
+          this.ctx.font = "30px Arial";
+          this.ctx.fillStyle = "black";
+          this.ctx.fillText(strMessage,this.canvas.width/2,this.canvas.height/2);
+         }
+        
+        
+        /**********************************************
+           the animation loop;  draw the objects
+           
+        **********************************************/ 
+        game.draw = function() {
+          //console.log(this);
+          var collisionScrollerIndex = -1;
+          this.ctx.fillStyle = "white";
+          this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height); 
+          this.drawInfo();
+          this.drawPlayer();
+          this.drawScrollers();
+          collisionScrollerIndex = this.checkCollisions();
+          if (collisionScrollerIndex > -1) {
+            this.handleCollision(collisionScrollerIndex);
+          };
+          this.updateScrollers();
+          
+          if (this.state == "play") {
+            requestAnimationFrame(function() {
+              game.draw();
+            })            
+          }
+        }        
+        
+        
+        /**********************************************
+           display points and lives
+           
+        **********************************************/ 
+        game.drawInfo = function () {
+          this.ctx.font = "30px Arial";
+          this.ctx.fillStyle = "black";
+          this.ctx.fillText("Lives: " + this.player.lives + " Score: " + this.score,10,50);
+
+        }         
+        
+        
+        
+        /**********************************************
+           update points, lives, position and display message
+           
+        **********************************************/ 
+        game.handleCollision = function (intIndex) {
+          this.state = "collision";
+          var scroller = this.scrollers[intIndex];
+          
+          scroller.x += this.canvas.width + 100;  // make it take a while to reappear
+          scroller.y = Math.random()*this.canvas.height;
+          // could do all sorts of things to the scroller after collision;  change size, color, speed
+          
+          switch (scroller.type) {
+            case "benefit" :
+              this.score += 50;   
+              this.state = "play";
+              // future:  play a sound?
+              //this.state = "collision";
+              //this.displayMessage("Points! Click to continue");
+              break;
+            case "harm" :
+              this.player.lives --;
+              
+              if (this.player.lives < 0) {
+                this.state = "over";
+                this.displayMessage("Game Over: Click to Restart (if it was workign)");
+              }
+              else {
+                this.state = "collision";
+                this.displayMessage("Ouch! Click to continue");                
+              }              
+          }
+        }
+        
+        
+        
+        
+        /**********************************************
+         update the position of the harms objects;
+          handle the edge condition
+        **********************************************/        
+        game.checkCollisions = function () {
+          var player = this.player;
+          var scroller, distance, collisionScrollerIndex = -1;
+          
+          // since mine are circles, collision can be determined
+          //  by the distance between the centers
+          for (var i=0; i< this.scrollers.length; i++) {
+            scroller = this.scrollers[i];
+            distance = Math.pow( Math.pow(scroller.y - player.y,2) + Math.pow(scroller.x - player.x,2) , .5);
+            
+            
+            var radius = 20;
+            // I hard-coded the radii of the objects;  they could/should be properties
+            if (distance <= radius * 2 ) {  
+              collisionScrollerIndex = i;
+            }   
+          }
+          
+          return collisionScrollerIndex;
+          
+          
+        }  
+        
+       /**********************************************
+           update the position of the harms objects;
+            handle the edge condition
+        **********************************************/
+        game.updateScrollers = function() {
+          for (var i=0; i< this.scrollers.length; i++) {
+            this.scrollers[i].x -= this.scrollers[i].speed;
+            if (this.scrollers[i].x < -30) {
+              this.scrollers[i].x = this.canvas.width + (Math.random()*100);
+              this.scrollers[i].y = Math.random()*this.canvas.height;
+              this.scrollers[0].speed++;
+            }
+            
+            
+          }
+        }
+        
+        /**********************************************
+          draw the scrollers
+        **********************************************/
+        game.drawScrollers = function () {
+          var game = this;
+          $.each(game.scrollers, function(i,v) {
+            var scrollerColor = (v.type == "harm") ? "red" : "green"; 
+            game.ctx.beginPath();
+            game.ctx.fillStyle = scrollerColor;
+            game.ctx.arc(v.x, v.y, 20, 0, Math.PI*2);
+            game.ctx.fill();
+          })
+        }
+        
+        /**********************************************
+          draw the player
+        **********************************************/
+        game.drawPlayer = function () {
+          this.ctx.beginPath();
+          this.ctx.fillStyle = "blue";
+          this.ctx.arc(this.player.x, this.player.y, 20, 0, Math.PI*2);
+          this.ctx.fill();
+        }
+        
+        
+        globalGame = game;   // global var so we can view in the console
+
+
+
+        /**********************************************
+          keypress events
+          
+          code from w3schools
+        **********************************************/        
+        $(document).keydown(function(e) {
+            switch(e.which) {
+                case 38: // up
+                game.player.y-=5;
+                break;
+                case 40: // down
+                game.player.y+=5;
+                break;
+        
+                default: return; // exit this handler for other keys
+            }
+            e.preventDefault(); // prevent the default action (scroll / move caret)
+        });
+        
+        
+        
+        
+        
+        /**********************************************
+          canvas click events;  behavior based on game state
+        **********************************************/
+        $("canvas").on("click", function(e) {
+          var callDraw = false;
+          
+          // check the status
+          switch (game.state) {
+            case "start" : 
+            case "collision" :
+              game.state = "play";
+              callDraw = true;
+              break;
+            case "over" :
+              game.start();
+              break;
+            }
+          
+          // if needed, start drawing again
+          if (callDraw) {              
+              requestAnimationFrame(function () {
+                  game.draw()
+              });
+          }  
+        });
+          
+        
+        game.start();        
+        
+        
+      })
+    
+
+      
+      
+      
+      
+      
+      
+      
+    </script>
+  </body>
+</html>
