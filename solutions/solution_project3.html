@@ -68,7 +68,7 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Partial Solution for Project 3</h1>
-        <p>This sample solution creates a game object, with various properties and methods.  You could build your game differently, but this avoids having to pass a lot of objects between functions.  I broke mine up into different functions as I was building it;  it seemed the easier way that putting everything inside the animation loop.</p>
+        <p>This sample solution creates a game object, with various properties and methods.  You could build your game differently, but this avoids having to pass a lot of objects between functions.  I broke mine up into different functions as I was building it;  it seemed the easier way than putting everything inside the animation loop.</p>
         <p>The player and the scrollers are objects, the latter an array of scroller objects.  With this strategy, we can easily change the number of each type of item (based on levels or something else) or create new types of items at different levels.  </p>
         <p>A complete student project would need at least one object type to show an image and would need some theme/concept (underwater, space, campus, etc.)</p>
         <p>Restarting the game doesn't work at the moment.</p>
@@ -262,7 +262,7 @@
               
               if (this.player.lives < 0) {
                 this.state = "over";
-                this.displayMessage("Game Over: Click to Restart (if it was workign)");
+                this.displayMessage("Game Over: Click to Restart (if it was working)");
               }
               else {
                 this.state = "collision";
@@ -275,8 +275,7 @@
         
         
         /**********************************************
-         update the position of the harms objects;
-          handle the edge condition
+         determine whether any objects are in collision with the player
         **********************************************/        
         game.checkCollisions = function () {
           var player = this.player;
@@ -302,7 +301,7 @@
         }  
         
        /**********************************************
-           update the position of the harms objects;
+           update the position of the scroller objects;
             handle the edge condition
         **********************************************/
         game.updateScrollers = function() {
