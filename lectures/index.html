@@ -33,39 +33,4 @@
         </script>
         
     </body>
-</html><!DOCTYPE html>
-<html>
-    <head>
-        <title>IT202 Home</title>
-        <link rel="stylesheet" href="/assets/document_styles.css">
-    </head>
-    <body>
-        <h1>IT 202</h1>
-        <h2>The <a href="../projects/big/index.html">Big Project</a> is due Apr 16, 11:59pm</h2>
-        <!--<h2>The mid-term is Monday, March 13</h2>-->
-        <p><a href="../projects/5/index.html">Project 5</a> due Mar 29 11:59pm</p>
-        
-        <p><a href="../projects/4/index.html">Project 4</a> due Mar 11 11:59pm</p>
-        <p><a href="../projects/3/index.html">Project 3</a> due Feb 26 11:59pm</p>
-        
-        <ol id='listLectures'></ol>
-        
-        
-        
-        <script>
-            var maxLectureNumber = 20;
-            var list = document.getElementById("listLectures");
-            var li, a, node;
-            for (var i=1; i<= maxLectureNumber; i++) {
-                a = document.createElement("a");
-                li = document.createElement("li");
-                a.href="./" + i + "/index.html";
-                a.innerHTML = "Lecture " + i;
-                li.appendChild(a);
-                list.appendChild(li);
-            }
-            
-        </script>
-        
-    </body>
 </html>
