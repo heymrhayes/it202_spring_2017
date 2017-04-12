@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Image Capture Example</title>
+    </head>
+    <body>
+<video id="player" controls autoplay></video>
+<button id="capture">Capture</button>
+<canvas id="snapshot" width=320 height=240></canvas>
+<button id="download" disabled>Download</button>
+
+<script>
+
+  var player = document.getElementById('player'); 
+  var snapshotCanvas = document.getElementById('snapshot');
+  var captureButton = document.getElementById('capture');
+  var downloadButton = document.getElementById('download');
+  var videoTracks;
+  var mediaRecorder;
+
+  var handleSuccess = function(stream) {
+    // Attach the video stream to the video element and autoplay.
+    player.srcObject = stream;
+    videoTracks = stream.getVideoTracks();
+    downloadButton.disabled = false;
+    record(stream);
+  };
+
+  captureButton.addEventListener('click', function() {
+    var context = snapshot.getContext('2d');
+    // Draw the video frame to the canvas.
+    context.drawImage(player, 0, 0, snapshotCanvas.width, 
+        snapshotCanvas.height);
+    // Stop all video streams.
+    videoTracks.forEach(function(track) {track.stop()});
+  });
+
+  navigator.mediaDevices.getUserMedia({video: true})
+      .then(handleSuccess);
+      
+      
+    var recordedChunks = [];
+
+
+    function record(stream) {
+    var options = {mimeType: 'video/webm;codecs=vp9'};
+    mediaRecorder = new MediaRecorder(stream, options);
+    mediaRecorder.ondataavailable = handleDataAvailable;
+    mediaRecorder.start();
+    
+    }
+    function handleDataAvailable(event) {
+      if (event.data.size > 0) {
+        recordedChunks.push(event.data);
+        console.log("chunk pushed", event)
+      } else {
+        // ...
+      }
+    }  
+      
+    function download() {
+      var blob = new Blob(recordedChunks, {
+        type: 'video/webm'
+      });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      document.body.appendChild(a);
+      a.style = 'display: none';
+      a.href = url;
+      a.download = 'test.webm';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }  
+    downloadButton.addEventListener('click', function() {
+       download(); 
+    });
+</script>
+
+    </body>
+</html>

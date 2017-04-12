@@ -1,0 +1,180 @@
+<html>
+
+<head>
+  <!-- Material Design Lite -->
+  <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <!-- Material Design icon font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <style>
+    .page-content {
+      padding-left: 50px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- Simple header with fixed tabs. -->
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+                mdl-layout--fixed-tabs">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">Shoppppppp!!!</span>
+      </div>
+      <!-- Tabs -->
+      <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+        <a href="#display" class="mdl-layout__tab is-active">Display</a>
+        <a href="#add" class="mdl-layout__tab">Add</a>
+        <a href="#fixed-tab-3" class="mdl-layout__tab">Tab 3</a>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">Title</span>
+    </div>
+    <main class="mdl-layout__content">
+      <section class="mdl-layout__tab-panel is-active" id="display">
+        <div class="page-content">
+          <h2>Shopping List</h2>
+          <!-- Expandable Textfield -->
+          <form action="#">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+              <label class="mdl-button mdl-js-button mdl-button--icon" for="query">
+                <i class="material-icons">search</i>
+              </label>
+              <div class="mdl-textfield__expandable-holder">
+                <input class="mdl-textfield__input" type="text" id="query">
+                <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
+              </div>
+            </div>
+            <!-- Colored raised button -->
+            <button id="btnSearch" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Search
+            </button>
+          </form>
+          
+          <div id="list">
+
+          </div>
+          <!-- Your content goes here -->
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="add">
+        <div class="page-content">
+          <form action="#">
+            <div class="mdl-textfield mdl-js-textfield">
+              <input class="mdl-textfield__input" type="text" id="store">
+              <label class="mdl-textfield__label" for="store">Store...</label>
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield">
+              <input class="mdl-textfield__input" type="text" id="category">
+              <label class="mdl-textfield__label" for="category">Category...</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield">
+              <input class="mdl-textfield__input" type="text" id="name">
+              <label class="mdl-textfield__label" for="name">Name...</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield">
+              <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="price">
+              <label class="mdl-textfield__label" for="sample2">Price...</label>
+              <span class="mdl-textfield__error">Input is not a number!</span>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield">
+              <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="quantity">
+              <label class="mdl-textfield__label" for="quantity">Quantity...</label>
+              <span class="mdl-textfield__error">Input is not a number!</span>
+            </div>
+            <!-- Colored raised button -->
+            <button id="btnAdd" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Add
+            </button>
+          </form>
+
+          <!-- Your content goes here -->
+        </div>
+      </section>
+      <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+        <div class="page-content">
+          <!-- Your content goes here -->
+        </div>
+      </section>
+    </main>
+  </div>
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <!-- Include Dexie -->
+  <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+  <script>
+    //
+    // Define your database
+    //
+    var db = new Dexie("shopDB");
+    db.version(1).stores({
+      shopList: '++id,store,category,name,price,quantity'
+    });
+
+
+    // get list items
+    db.shopList
+      .each(function(item) {
+        var html = item.store +
+          "<br>" +
+          item.category +
+          "<br>" +
+          item.name +
+          "<br>" +
+          item.quantity +
+          "<br>" +
+          item.price +
+          "<br>" +
+          (item.quantity * item.price) +
+          "<hr>";
+        $("#list").append(html);
+        //console.log (item.name);
+      });
+
+      
+      
+      $("#btnAdd").on("click", function(){
+        db.shopList.add({
+            store: $("#store").val(),
+            category: $("#category").val(),
+            name: $("#name").val(),
+            price: $("#price").val(),
+            quantity: $("#quantity").val()
+        });        
+      })
+
+      $("#btnSearch").on("click", function(){
+        	$("#list").html("");
+        	db.shopList
+        		.where('name')
+        		.startsWithIgnoreCase($("#query").val())
+        		.each (function (item) {
+        			var html = item.store +
+                  "<br>" +
+                  item.category +
+                  "<br>" +
+                  item.name +
+                  "<br>" +
+                  item.quantity +
+                  "<br>" +
+                  item.price +
+                  "<br>" +
+                  (item.quantity * item.price) +
+                  "<hr>";
+                $("#list").append(html);
+        		});
+
+        
+        
+        
+      })
+
+
+
+
+  </script>
+</body>
+
+</html>
